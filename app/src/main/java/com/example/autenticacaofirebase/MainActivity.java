@@ -23,9 +23,24 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        FirebaseUser currentuser = mAuth.getCurrentUser();
 
-        mAuth.createUserWithEmailAndPassword("testeleandro@gmail.com", "842682ll")
+        //Login USUARIO
+
+        mAuth.signInWithEmailAndPassword("testeleandro@gmail.com", "842682ll")
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if(task.isSuccessful()){
+                            Log.i("AUTH", "usuario Logado");
+                        }else{
+                            Log.i("AUTH", "Erro ao logar");
+                        }
+                    }
+                });
+
+        // CREATE USUARIO
+        /*mAuth.createUserWithEmailAndPassword("testeleandro@gmail.com", "842682ll")
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -37,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+         */
 
     }
 
